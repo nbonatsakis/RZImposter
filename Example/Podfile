@@ -1,0 +1,12 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
+target 'RZImposter', :exclusive => true do
+  pod "RZImposter", :path => "../"
+end
+
+target 'Tests', :exclusive => true do
+  pod "RZImposter", :path => "../"
+
+  pod 'Specta'
+  pod 'Expecta'
+end
