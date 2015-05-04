@@ -1,0 +1,30 @@
+{
+  "name": "RZImposter",
+  "version": "0.1.0",
+  "summary": "A short description of RZImposter.",
+  "description": "                       An optional longer description of RZImposter\n\n                       * Markdown format.\n                       * Don't worry about the indent, we strip it!\n",
+  "homepage": "https://github.com/<GITHUB_USERNAME>/RZImposter",
+  "license": "MIT",
+  "authors": {
+    "Nick Bonatsakis": "nbonatsakis@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/<GITHUB_USERNAME>/RZImposter.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "requires_arc": true,
+  "source_files": "RZImposter/Classes/**/*",
+  "resource_bundles": {
+    "RZImposter": [
+      "RZImposter/Assets/*.png"
+    ]
+  },
+  "dependencies": {
+    "OHHTTPStubs": [
+      "~> 4.0.1"
+    ]
+  }
+}

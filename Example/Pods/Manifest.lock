@@ -1,0 +1,43 @@
+PODS:
+  - AFNetworking (2.5.3):
+    - AFNetworking/NSURLConnection (= 2.5.3)
+    - AFNetworking/NSURLSession (= 2.5.3)
+    - AFNetworking/Reachability (= 2.5.3)
+    - AFNetworking/Security (= 2.5.3)
+    - AFNetworking/Serialization (= 2.5.3)
+    - AFNetworking/UIKit (= 2.5.3)
+  - AFNetworking/NSURLConnection (2.5.3):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.5.3):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.5.3)
+  - AFNetworking/Security (2.5.3)
+  - AFNetworking/Serialization (2.5.3)
+  - AFNetworking/UIKit (2.5.3):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+  - Expecta (0.3.2)
+  - OHHTTPStubs (4.0.1)
+  - RZImposter (0.1.0):
+    - OHHTTPStubs (~> 4.0.1)
+
+DEPENDENCIES:
+  - AFNetworking (~> 2.5.3)
+  - Expecta (~> 0.3.1)
+  - RZImposter (from `../`)
+
+EXTERNAL SOURCES:
+  RZImposter:
+    :path: ../
+
+SPEC CHECKSUMS:
+  AFNetworking: e1d86c2a96bb5d2e7408da36149806706ee122fe
+  Expecta: 8c507baf13211207b1e9d0a741480600e6b4ed15
+  OHHTTPStubs: 69b1d48b7dfe838a355fdf48d8592d1042e3d85f
+  RZImposter: 0a612a7f74e73b0f10bb7cd794ff695e94c23af4
+
+COCOAPODS: 0.37.0
