@@ -44,17 +44,26 @@
 {
     [super setUp];
 
-    self.sessionmanager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:@"http://google.com"]];
-    self.host = [[RZIHost alloc] initWithBaseURL:[NSURL URLWithString:@"http://google.com"]];
+    self.sessionmanager = [[AFHTTPSessionManager alloc]
+        initWithBaseURL:[NSURL URLWithString:@"http://google.com"]];
+    self.host = [[RZIHost alloc]
+        initWithBaseURL:[NSURL URLWithString:@"http://google.com"]];
 }
 
 - (void)testGet_NoParams
 {
     RZIRoutes *routes = [[RZIRoutes alloc] init];
-    [routes get:@"/users" do:^OHHTTPStubsResponse *(NSURLRequest *request, NSDictionary *requestInfo) {
-        OHHTTPStubsResponse *response = [OHHTTPStubsResponse responseWithJSONObject:@{@"key":@44} statusCode:201 headers:@{@"Content-Type" : @"application/json"}];
-        return response;
-    }];
+    [routes get:@"/users"
+             do:^OHHTTPStubsResponse *(NSURLRequest *request,
+                                       NSDictionary *requestInfo) {
+                 OHHTTPStubsResponse *response =
+                     [OHHTTPStubsResponse responseWithJSONObject:@{
+                         @"key" : @44
+                     } statusCode:201 headers:@{
+                         @"Content-Type" : @"application/json"
+                     }];
+                 return response;
+             }];
 
     [self.host registerRoutes:routes];
 
@@ -75,10 +84,17 @@
 - (void)testGet_NoRoute
 {
     RZIRoutes *routes = [[RZIRoutes alloc] init];
-    [routes get:@"/users" do:^OHHTTPStubsResponse *(NSURLRequest *request, NSDictionary *requestInfo) {
-        OHHTTPStubsResponse *response = [OHHTTPStubsResponse responseWithJSONObject:@{@"key":@44} statusCode:201 headers:@{@"Content-Type" : @"application/json"}];
-        return response;
-    }];
+    [routes get:@"/users"
+             do:^OHHTTPStubsResponse *(NSURLRequest *request,
+                                       NSDictionary *requestInfo) {
+                 OHHTTPStubsResponse *response =
+                     [OHHTTPStubsResponse responseWithJSONObject:@{
+                         @"key" : @44
+                     } statusCode:201 headers:@{
+                         @"Content-Type" : @"application/json"
+                     }];
+                 return response;
+             }];
 
     [self.host registerRoutes:routes];
 
@@ -95,17 +111,25 @@
 - (void)testGet_PathParamsMatch
 {
     RZIRoutes *routes = [[RZIRoutes alloc] init];
-    [routes get:@"/users/:userID/items/:itemID" do:^OHHTTPStubsResponse *(NSURLRequest *request, NSDictionary *requestInfo) {
-        NSDictionary *pathParams = requestInfo[kRZIRequestPathParametersKey];
-        NSString *userID = pathParams[@"userID"];
-        expect(userID).to.equal(@"44");
+    [routes get:@"/users/:userID/items/:itemID"
+             do:^OHHTTPStubsResponse *(NSURLRequest *request,
+                                       NSDictionary *requestInfo) {
+                 NSDictionary *pathParams =
+                     requestInfo[kRZIRequestPathParametersKey];
+                 NSString *userID = pathParams[@"userID"];
+                 expect(userID).to.equal(@"44");
 
-        NSString *itemID = pathParams[@"itemID"];
-        expect(itemID).to.equal(@"2");
+                 NSString *itemID = pathParams[@"itemID"];
+                 expect(itemID).to.equal(@"2");
 
-        OHHTTPStubsResponse *response = [OHHTTPStubsResponse responseWithJSONObject:@{@"userID":@([userID intValue])} statusCode:201 headers:@{@"Content-Type" : @"application/json"}];
-        return response;
-    }];
+                 OHHTTPStubsResponse *response =
+                     [OHHTTPStubsResponse responseWithJSONObject:@{
+                         @"userID" : @([userID intValue])
+                     } statusCode:201 headers:@{
+                         @"Content-Type" : @"application/json"
+                     }];
+                 return response;
+             }];
 
     [self.host registerRoutes:routes];
 
@@ -126,14 +150,22 @@
 - (void)testGet_QueryParamsMatch
 {
     RZIRoutes *routes = [[RZIRoutes alloc] init];
-    [routes get:@"/users" do:^OHHTTPStubsResponse *(NSURLRequest *request, NSDictionary *requestInfo) {
-        NSDictionary *queryParams = requestInfo[kRZIRequestQueryParametersKey];
-        NSString *userID = queryParams[@"userID"];
-        expect(userID).to.equal(@"44");
+    [routes get:@"/users"
+             do:^OHHTTPStubsResponse *(NSURLRequest *request,
+                                       NSDictionary *requestInfo) {
+                 NSDictionary *queryParams =
+                     requestInfo[kRZIRequestQueryParametersKey];
+                 NSString *userID = queryParams[@"userID"];
+                 expect(userID).to.equal(@"44");
 
-        OHHTTPStubsResponse *response = [OHHTTPStubsResponse responseWithJSONObject:@{@"userID":@([userID intValue])} statusCode:201 headers:@{@"Content-Type" : @"application/json"}];
-        return response;
-    }];
+                 OHHTTPStubsResponse *response =
+                     [OHHTTPStubsResponse responseWithJSONObject:@{
+                         @"userID" : @([userID intValue])
+                     } statusCode:201 headers:@{
+                         @"Content-Type" : @"application/json"
+                     }];
+                 return response;
+             }];
 
     [self.host registerRoutes:routes];
 
@@ -157,14 +189,23 @@
     NSDictionary *matchDict = @{
         kRZIRequestMatchHeadersKey : @{@"foo" : @"bar"}
     };
-    [routes get:@"/users" match:matchDict do:^OHHTTPStubsResponse *(NSURLRequest *request, NSDictionary *requestInfo) {
-        OHHTTPStubsResponse *response = [OHHTTPStubsResponse responseWithJSONObject:@{@"key":@44} statusCode:201 headers:@{@"Content-Type" : @"application/json"}];
-        return response;
-    }];
+    [routes get:@"/users"
+          match:matchDict
+             do:^OHHTTPStubsResponse *(NSURLRequest *request,
+                                       NSDictionary *requestInfo) {
+                 OHHTTPStubsResponse *response =
+                     [OHHTTPStubsResponse responseWithJSONObject:@{
+                         @"key" : @44
+                     } statusCode:201 headers:@{
+                         @"Content-Type" : @"application/json"
+                     }];
+                 return response;
+             }];
 
     [self.host registerRoutes:routes];
 
-    [self.sessionmanager.requestSerializer setValue:@"bar" forHTTPHeaderField:@"foo"];
+    [self.sessionmanager.requestSerializer setValue:@"bar"
+                                 forHTTPHeaderField:@"foo"];
 
     __block BOOL success = NO;
     [self.sessionmanager GET:@"/users" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -186,14 +227,23 @@
     NSDictionary *matchDict = @{
         kRZIRequestMatchHeadersKey : @{@"foo" : @"bar"}
     };
-    [routes get:@"/users" match:matchDict do:^OHHTTPStubsResponse *(NSURLRequest *request, NSDictionary *requestInfo) {
-        OHHTTPStubsResponse *response = [OHHTTPStubsResponse responseWithJSONObject:@{@"key":@44} statusCode:201 headers:@{@"Content-Type" : @"application/json"}];
-        return response;
-    }];
+    [routes get:@"/users"
+          match:matchDict
+             do:^OHHTTPStubsResponse *(NSURLRequest *request,
+                                       NSDictionary *requestInfo) {
+                 OHHTTPStubsResponse *response =
+                     [OHHTTPStubsResponse responseWithJSONObject:@{
+                         @"key" : @44
+                     } statusCode:201 headers:@{
+                         @"Content-Type" : @"application/json"
+                     }];
+                 return response;
+             }];
 
     [self.host registerRoutes:routes];
 
-    [self.sessionmanager.requestSerializer setValue:@"badVal" forHTTPHeaderField:@"foo"];
+    [self.sessionmanager.requestSerializer setValue:@"badVal"
+                                 forHTTPHeaderField:@"foo"];
 
     __block BOOL failed = NO;
     [self.sessionmanager GET:@"/users" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {

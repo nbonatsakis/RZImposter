@@ -38,7 +38,9 @@
 - (void)testTokenReplacedPathValuesFromPopulatedURL
 {
     NSURL *templateURL = [NSURL URLWithString:@"/user/:userID/items/:itemID"];
-    NSDictionary *params = [templateURL rzi_tokenReplacedPathValuesFromPopulatedURL:[NSURL URLWithString:@"/user/21/items/1"]];
+    NSDictionary *params =
+        [templateURL rzi_tokenReplacedPathValuesFromPopulatedURL:
+                         [NSURL URLWithString:@"/user/21/items/1"]];
 
     expect(params).notTo.beNil();
     expect(params.count).to.equal(2);
@@ -48,8 +50,11 @@
 
 - (void)testTokenReplacedQueryValuesFromPopulatedURL
 {
-    NSURL *templateURL = [NSURL URLWithString:@"/user?userID=:userID&itemID=:itemID"];
-    NSDictionary *params = [templateURL rzi_tokenReplacedQueryValuesFromPopulatedURL:[NSURL URLWithString:@"/user?userID=21&itemID=1"]];
+    NSURL *templateURL =
+        [NSURL URLWithString:@"/user?userID=:userID&itemID=:itemID"];
+    NSDictionary *params =
+        [templateURL rzi_tokenReplacedQueryValuesFromPopulatedURL:
+                         [NSURL URLWithString:@"/user?userID=21&itemID=1"]];
     expect(params).notTo.beNil();
     expect(params.count).to.equal(2);
     expect(params[@"userID"]).to.equal(@"21");
@@ -58,41 +63,38 @@
 
 - (void)testMatchesRequestHeaders
 {
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://google.com"]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
+        initWithURL:[NSURL URLWithString:@"http://google.com"]];
     [request setValue:@"bar" forHTTPHeaderField:@"foo"];
     [request setValue:@"abc" forHTTPHeaderField:@"auth"];
 
-    NSDictionary *expected = @{
-        @"foo" : @"bar",
-        @"auth" : @"abc"
-    };
+    NSDictionary *expected = @{ @"foo" : @"bar",
+                                @"auth" : @"abc" };
 
     expect([request rzi_containsHeaders:expected]).to.beTruthy();
 }
 
 - (void)testMatchesRequestHeaders_DifferentContent
 {
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://google.com"]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
+        initWithURL:[NSURL URLWithString:@"http://google.com"]];
     [request setValue:@"bar" forHTTPHeaderField:@"foo"];
     [request setValue:@"abc" forHTTPHeaderField:@"auth"];
 
-    NSDictionary *expected = @{
-        @"foo" : @"bar",
-        @"auth" : @"abcdef"
-    };
+    NSDictionary *expected = @{ @"foo" : @"bar",
+                                @"auth" : @"abcdef" };
 
     expect([request rzi_containsHeaders:expected]).to.beFalsy();
 }
 
 - (void)testMatchesRequestHeaders_DifferentNumValues
 {
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://google.com"]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
+        initWithURL:[NSURL URLWithString:@"http://google.com"]];
     [request setValue:@"bar" forHTTPHeaderField:@"foo"];
 
-    NSDictionary *expected = @{
-        @"foo" : @"bar",
-        @"auth" : @"abcdef"
-    };
+    NSDictionary *expected = @{ @"foo" : @"bar",
+                                @"auth" : @"abcdef" };
 
     expect([request rzi_containsHeaders:expected]).to.beFalsy();
 }

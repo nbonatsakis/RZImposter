@@ -63,30 +63,29 @@
 
         return NO;
     }
-withStubResponse:
-    ^OHHTTPStubsResponse *(NSURLRequest *request)
-    {
-        RZIRouteInfo *routeInfo = [self findRouteInfoFromRoutes:routes forRequest:request];
-        NSMutableDictionary *params = [NSMutableDictionary dictionary];
+                        withStubResponse:
+                            ^OHHTTPStubsResponse *(NSURLRequest *request) {
+                                RZIRouteInfo *routeInfo = [self findRouteInfoFromRoutes:routes forRequest:request];
+                                NSMutableDictionary *params = [NSMutableDictionary dictionary];
 
-        NSString *routePath = [self.baseURL.path stringByAppendingPathComponent:routeInfo.path];
-        NSDictionary *pathParams = [[NSURL URLWithString:routePath] rzi_tokenReplacedPathValuesFromPopulatedURL:request.URL];
-        if (pathParams != nil) {
-            params[kRZIRequestPathParametersKey] = pathParams;
-        }
+                                NSString *routePath = [self.baseURL.path stringByAppendingPathComponent:routeInfo.path];
+                                NSDictionary *pathParams = [[NSURL URLWithString:routePath] rzi_tokenReplacedPathValuesFromPopulatedURL:request.URL];
+                                if (pathParams != nil) {
+                                    params[kRZIRequestPathParametersKey] = pathParams;
+                                }
 
-        NSDictionary *queryParams = [request.URL rzi_queryParamsAsDictionary];
-        if (queryParams != nil) {
-            params[kRZIRequestQueryParametersKey] = queryParams;
-        }
+                                NSDictionary *queryParams = [request.URL rzi_queryParamsAsDictionary];
+                                if (queryParams != nil) {
+                                    params[kRZIRequestQueryParametersKey] = queryParams;
+                                }
 
-        OHHTTPStubsResponse *stubResp = nil;
-        if (routeInfo != nil) {
-            stubResp = routeInfo.responseBlock(request, [params copy]);
-        }
+                                OHHTTPStubsResponse *stubResp = nil;
+                                if (routeInfo != nil) {
+                                    stubResp = routeInfo.responseBlock(request, [params copy]);
+                                }
 
-        return stubResp;
-    }];
+                                return stubResp;
+                            }];
 }
 
 - (RZIRouteInfo *)findRouteInfoFromRoutes:(RZIRoutes *)routes forRequest:(NSURLRequest *)request
