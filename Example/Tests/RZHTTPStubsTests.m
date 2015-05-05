@@ -65,9 +65,7 @@
         expect(responseObject[@"key"]).to.equal(@44);
         NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
         expect(response.statusCode).to.equal(201);
-    }
-failure:
-    ^(NSURLSessionDataTask *task, NSError *error) {
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
         XCTFail(@"Failed request, error: %@", error);
     }];
 
@@ -87,14 +85,11 @@ failure:
     __block BOOL failed = NO;
     [self.sessionmanager GET:@"/contacts" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         XCTFail(@"Test should fail, shouldn't find route");
-    }
-failure:
-    ^(NSURLSessionDataTask *task, NSError *error) {
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
         failed = YES;
     }];
 
-    //TODO: fix this test
-    //    expect(failed).will.beTruthy();
+    expect(failed).will.beTruthy();
 }
 
 - (void)testGet_PathParamsMatch
@@ -121,9 +116,7 @@ failure:
         expect(responseObject[@"userID"]).to.equal(@44);
         NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
         expect(response.statusCode).to.equal(201);
-    }
-failure:
-    ^(NSURLSessionDataTask *task, NSError *error) {
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
         XCTFail(@"Failed request, error: %@", error);
     }];
 
@@ -151,9 +144,7 @@ failure:
         expect(responseObject[@"userID"]).to.equal(@44);
         NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
         expect(response.statusCode).to.equal(201);
-    }
-failure:
-    ^(NSURLSessionDataTask *task, NSError *error) {
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
         XCTFail(@"Failed request, error: %@", error);
     }];
 
@@ -182,9 +173,7 @@ failure:
         expect(responseObject[@"key"]).to.equal(@44);
         NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
         expect(response.statusCode).to.equal(201);
-    }
-failure:
-    ^(NSURLSessionDataTask *task, NSError *error) {
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
         XCTFail(@"Failed request, error: %@", error);
     }];
 
@@ -209,14 +198,11 @@ failure:
     __block BOOL failed = NO;
     [self.sessionmanager GET:@"/users" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         XCTFail(@"Reuqest should fail");
-    }
-failure:
-    ^(NSURLSessionDataTask *task, NSError *error) {
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
         failed = YES;
     }];
 
-    //TODO: fix this test
-    //    expect(failed).will.beTruthy();
+    expect(failed).will.beTruthy();
 }
 
 @end

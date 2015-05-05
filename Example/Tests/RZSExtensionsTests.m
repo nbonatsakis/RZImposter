@@ -29,7 +29,6 @@
 #import "NSURL+RZIExtensions.h"
 #import "NSURLRequest+RZIExtensions.h"
 
-
 @interface RZIExtensionsTests : XCTestCase
 
 @end
